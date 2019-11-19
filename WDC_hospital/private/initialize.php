@@ -20,5 +20,9 @@
   define("WWW_ROOT", $doc_root);
 
   require_once('functions.php');
+  require_once('database.php');
+  require_once('validation_func.php');
+  
+  $db = get_db_connect();
 
 ?>

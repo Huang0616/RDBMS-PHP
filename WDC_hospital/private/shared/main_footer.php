@@ -4,3 +4,5 @@
 
 </body>
 </html>
+
+<?php close_db_connect($db);?>

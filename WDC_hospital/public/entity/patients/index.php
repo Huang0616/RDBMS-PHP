@@ -1,12 +1,7 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php
-  $patients = [
-    ['id' => '1', 'name' => '1', 'city' => '1', 'zipcode' => 'About Globe Bank'],
-    ['id' => '2', 'name' => '2', 'city' => '1', 'zipcode' => 'Consumer'],
-    ['id' => '3', 'name' => '3', 'city' => '1', 'zipcode' => 'Small Business'],
-    ['id' => '4', 'name' => '4', 'city' => '1', 'zipcode' => 'Commercial'],
-  ];
+	$patient_set = query_all_patients();
 ?>
 
 <?php $page_title = 'Patients'; ?>
@@ -24,29 +19,30 @@
 		<table class='list'>
 			<tr>
 				<th>ID</th>
-				<th>Name</th>
-				<th>Citu</th>
-				<th>Zipcode</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Gender</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 			</tr>
 
-			<?php foreach ($patients as $patient) { ?>
+			<?php foreach ($patient_set as $patient) { ?>
 				<tr>
-					<td><?php echo h($patient['id']); ?></td>
-					<td><?php echo h($patient['name']); ?></td>
-					<td><?php echo h($patient['city']); ?></td>
-					<td><?php echo h($patient['zipcode']) ;?></td>
+					<td><?php echo h($patient['pid']); ?></td>
+					<td><?php echo h($patient['pfname']); ?></td>
+					<td><?php echo h($patient['plname']); ?></td>
+					<td><?php echo h($patient['pgender']) ;?></td>
 					<td>
-						<a class = 'actions' href = '<?php echo url_for('/entity/patients/show.php?id='.h(u($patient['id']))); ?>'>View
+						<a class = 'actions' href = '<?php echo url_for('/entity/patients/show.php?pid='.h(u($patient['pid']))); ?>'>View Details
 						</a>
 					</td>
-					<td><a class = 'actions' href = '<?php echo url_for('/entity/patients/edit.php?id='.h(u($patient['id']))); ?>'>Edit</a></td>
-					<td><a class = 'actions' href = 'Delete'>Delete</a></td>
+					<td><a class = 'actions' href = '<?php echo url_for('/entity/patients/edit.php?pid='.h(u($patient['pid']))); ?>'>Edit</a></td>
+					<td><a class = 'actions' href = '<?php echo url_for('/entity/patients/delete.php?pid='.h(u($patient['pid'])));?>'>Delete</a></td>
 				</tr>
 			<?php } ?>
 		</table>
+		<?php mysqli_free_result($patient_set); ?>
 	</div>
 </div>
 

@@ -1,21 +1,28 @@
 <?php require_once('../../../private/initialize.php');
 
-$id = '';
-$fname = '';
-$lname = '';
-$birthday = '';
-$gender = '';
-$race = '';
-$status = '';
 if(is_post_request()){
-	$id = $_POST['id']??'';
-	$fname = $_POST['fname']??'';
-	$lname = $_POST['lname']??'';
-	$birthday = $_POST['birthday']??'';
-	$gender = $_POST['gender']??'';
-	$race = $_POST['race']??'';
-	$status = $_POST['status']??'';
-	echo "post process";
+	$patient = [];
+	$patient['fname'] = $_POST['pfname']??'';
+	$patient['lname'] = $_POST['plname']??'';
+	$patient['birthday'] = $_POST['pbd']??'';
+	$patient['gender'] = $_POST['pgender']??'';
+	$patient['race'] = $_POST['prace']??'';
+	$patient['status'] = $_POST['pstatus']??'';
+	$new_patient = add_patient($patient);
+	$id = find_max_patient_id();
+	if($new_patient === true){
+		redirect_to(url_for('/entity/patients/show.php?pid='.h(u($id))));
+	}else{
+		$errors = $new_patient;
+	}
+}else{
+	$patient = [];
+	$patient['fname'] = '';
+	$patient['lname'] = '';
+	$patient['birthday'] = '';
+	$patient['gender'] = '';
+	$patient['race'] = '';
+	$patient['status'] = '';
 }
 ?>
 
@@ -26,39 +33,50 @@ if(is_post_request()){
 
 <div id='content'>
 	<h1>Add New Patient</h1>
+	<a class='back_link' href = '<?php echo url_for('/entity/patients/index.php');?>'>
+		&laquo;Back to List
+	</a>
 	<form class='add_patient' action="<?php echo url_for('/entity/patients/add.php');?>" method="post">  
-		<div>
-			Patient ID: <input type="text" name="id" value='<?php echo(h($id));?>'>
+		<div style="display:none">
+			Patient ID: <input type="text" name="pid" value='<?php echo(h($patient['id']));?>'>
 		</div>
 		<div>
-			First Name: <input type="text" name="fname" value='<?php echo(h($fname));?>'>
+			First Name: <input type="text" name="pfname" value='<?php echo(h($patient['fname']));?>'>
+			<span class='errors'><?php echo $errors['fname']??'';?></span>
 		</div>
 		<div>
-			Last Name: <input type="text" name="lname" value='<?php echo(h($lname));?>'>
+			Last Name: <input type="text" name="plname" value='<?php echo(h($patient['lname']));?>'>
+			<span class='errors'><?php echo $errors['lname']??'';?></span>
 		</div>
 		<div>
-			Birthday: <input type="text"name="birthday"value='<?php echo(h($birthday));?>'>
+			Birthday: <input type="text"name="pbd"value='<?php echo(h($patient['birthday']));?>'>
+			<span class='errors'><?php echo $errors['birthday']??'';?></span>
 		</div>
 		<div>
-			Gender: <input type="radio" name="gender" value='M'<?php if($gender=='M'){echo "checked";} ?>>Male   
-					<input type="radio" name="gender" value='F'<?php if($gender=='F'){echo "checked";} ?>>Female 
-					<input type="radio" name="gender" value='U'<?php if($gender=='U'){echo "checked";} ?>>Unknown
+			Gender: <input type="radio" name="pgender" value='M'<?php if($patient['gender']=='M'){echo "checked";} ?>>Male   
+					<input type="radio" name="pgender" value='F'<?php if($patient['gender']=='F'){echo "checked";} ?>>Female 
+					<input type="radio" name="pgender" value='U'<?php if($patient['gender']=='U'){echo "checked";} ?>>Unknown
+					<span class='errors'><?php echo $errors['gender']??'';?></span>
 		</div>
 		<div>Race: 
-			<select name='race' >
-				<option value = '1'<?php if($race==1){echo "selected";} ?>>Asian</option>
-				<option value = '2'<?php if($race==2){echo "selected";} ?>>Hispanic</option>
-				<option value = '3'<?php if($race==3){echo "selected";} ?>>Latin American</option>
-				<option value = '4'<?php if($race==4){echo "selected";} ?>>African American</option>
-				<option value = '0'<?php if($race==0){echo "selected";} ?>>Others</option>
+			<select name='prace' >
+				<option value = ''></option>
+				<option value = 'ASIAN'<?php if($patient['race']=='ASIAN'){echo "selected";} ?>>Asian</option>
+				<option value = 'HISPANIC'<?php if($patient['race']=='HISPANIC'){echo "selected";} ?>>Hispanic</option>
+				<option value = 'AMEIRCAN'<?php if($patient['race']=='AMERICAN'){echo "selected";} ?>>American</option>
+				<option value = 'AFRICAN'<?php if($patient['race']=='AFRICAN'){echo "selected";} ?>>African</option>
+				<option value = 'LATINO'<?php if($patient['race']=='LATINO'){echo "selected";} ?>>Latino</option>
+				<option value = 'Others'<?php if($patient['race']=='Others'){echo "selected";} ?>>Others</option>
 			</select>
+			<span class='errors'><?php echo $errors['race']??'';?></span>
 		</div>
-		<div>Status: <input type="radio" name="status" value='M'<?php if($status=='M'){echo " 			checked";} ?>>Married   
-					<input type="radio" name="status" value='S'<?php if($status=='S'){echo "checked";} ?>>Single
-					<input type="radio" name="status" value='D'<?php if($status=='D'){echo "checked";} ?>>Divorced
-					<input type="radio" name="status" value='W'<?php if($status=='W'){echo "checked";} ?>>Widow or Widower
+		<div>Status: <input type="radio" name="pstatus" value='M'<?php if($patient['status']=='M'){echo " 			checked";} ?>>Married   
+					<input type="radio" name="pstatus" value='S'<?php if($patient['status']=='S'){echo "checked";} ?>>Single
+					<input type="radio" name="pstatus" value='D'<?php if($patient['status']=='D'){echo "checked";} ?>>Divorced
+					<input type="radio" name="pstatus" value='W'<?php if($patient['status']=='W'){echo "checked";} ?>>Widow or Widower
+					<span class='errors'><?php echo $errors['status']??'';?></span>
 		</div>
-		<div>Submit: <input type="Submit" name="add_patient"></div>
+		<div><input type="Submit" name="add_patient"></div>
 	</form>
 </div>
 <?php include(SHARED_PATH . '/main_footer.php'); ?>

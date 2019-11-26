@@ -1,4 +1,4 @@
-<?php require_once('../../private/initialize.php'); ?>
+<?php require_once('../../../private/initialize.php'); ?>
 
 <?php $page_title = 'Main Menu'; ?>
 <?php include(SHARED_PATH . '/main_header.php'); ?>
@@ -8,27 +8,15 @@
     <h2>Main Menu</h2>
     <ul>
       <li>
-      	<div class='entity'><a href="<?php echo url_for('/entity/physicians/index.php'); ?>">Physicians</a>
+      	<div class='entity'><a href="<?php echo url_for('/entity/restrict/physicians/index.php'); ?>">Physicians</a>
         </div>
       </li>
       <li>
-      	<div class='entity'><a href="<?php echo url_for('/entity/patients/index.php'); ?>">Patients</a>
-        </div>
-      </li>
-      <li>
-        <div class='entity'><a href="<?php echo url_for('/entity/hospitals/index.php'); ?>">Hospitals</a>
+      	<div class='entity'><a href="<?php echo url_for('/entity/restrict/patients/index.php'); ?>">Patients</a>
         </div>
       </li>
       <li>
         <div class='entity'><a href="<?php echo url_for('/index.php'); ?>">Diseases</a>
-        </div>
-      </li>
-      <li>
-        <div class='entity'><a href="<?php echo url_for('/index.php'); ?>">Departments</a>
-        </div>
-      </li>
-      <li>
-        <div class='entity'><a href="<?php echo url_for('/index.php'); ?>">Users</a>
         </div>
       </li>
       <li>

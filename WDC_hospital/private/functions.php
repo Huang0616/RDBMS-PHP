@@ -31,7 +31,7 @@ function error_500(){
 }
 
 function redirect_to($location){
-	header("location:" . $location);
+	header("refresh:0.5;url = " . $location);
 	exit;
 }
 
@@ -41,6 +41,11 @@ function is_post_request(){
 
 function is_get_request(){
   return $_SERVER['REQUEST_METHOD'] == 'GET';
+}
+
+function db_escape($db,$string){
+  // prevent sql injection
+  return mysqli_real_escape_string($db,$string);
 }
 
 ?>

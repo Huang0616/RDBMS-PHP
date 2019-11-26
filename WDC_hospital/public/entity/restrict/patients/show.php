@@ -1,11 +1,11 @@
-<?php require_once('../../../private/initialize.php'); ?>
+<?php require_once('../../../../private/initialize.php'); ?>
 
 <?php $page_title = 'Show Patient'; ?>
 <?php include(SHARED_PATH . '/main_header.php'); ?>
 
 <?php
 	if(!isset($_GET['pid'])){
-		redirect_to(url_for('/entity/patients/index.php'));
+		redirect_to(url_for('/entity/restrict/patients/index.php'));
 	}else{
 		$id = $_GET['pid'];
 	}
@@ -38,9 +38,9 @@
 		<label>Marital Status: </label><?php echo h($patient['pstatus']); ?>
 	</div>
 	<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a class = 'actions' href = '<?php echo url_for('/entity/patients/edit.php?pid='.h(u($patient['pid']))); ?>'>Edit</a>
+		<a class = 'actions' href = '<?php echo url_for('/entity/restrict/patients/edit.php?pid='.h(u($patient['pid']))); ?>'>Edit</a>
 		&nbsp;&nbsp;&nbsp;&nbsp;
-		<a class = 'actions' href = '<?php echo url_for('/entity/patients/delete.php?pid='.h(u($patient['pid'])));?>' onclick="return confirm('Are you sure to delete it?')">Delete</a>
+		<a class = 'actions' href = '<?php echo url_for('/entity/restrict/patients/delete.php?pid='.h(u($patient['pid'])));?>' onclick="return confirm('Are you sure to delete it?')">Delete</a>
 	</div>
 </div>
 

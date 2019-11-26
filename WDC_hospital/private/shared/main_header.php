@@ -18,6 +18,8 @@
 
     <navigation>
       <ul>
-        <li><a href="<?php echo url_for('/entity/index.php'); ?>">Menu</a></li>
+        <li><a href="<?php if($_SESSION['usertype'] == 'admin'){echo url_for('/entity/index.php');}else{echo url_for('/entity/restrict/index.php');} ?>">Menu</a></li>
+        <li><span>Current User: <?php echo $_SESSION['username'];?></span></li>
+        <li><a href="<?php echo url_for('/entity/login/index.php'); ?>">Exit</a></li>
       </ul>
     </navigation>

@@ -1,4 +1,4 @@
-<?php require_once('../../../private/initialize.php');
+<?php require_once('../../../../private/initialize.php');
 
 if(is_post_request()){
 	$patient = [];
@@ -11,7 +11,7 @@ if(is_post_request()){
 	$new_patient = add_patient($patient);
 	$id = find_max_patient_id();
 	if($new_patient === true){
-		redirect_to(url_for('/entity/patients/show.php?pid='.h(u($id))));
+		redirect_to(url_for('/entity/restrict/patients/show.php?pid='.h(u($id))));
 	}else{
 		echo "<script> alert('Something Wrong!')</script>";
 		$errors = $new_patient;
@@ -34,10 +34,10 @@ if(is_post_request()){
 
 <div id='content'>
 	<h1>Add New Patient</h1>
-	<a class='back_link' href = '<?php echo url_for('/entity/patients/index.php');?>'>
+	<a class='back_link' href = "javascript:history.go(-1)">
 		&laquo;Back to List
 	</a>
-	<form class='add' action="<?php echo url_for('/entity/patients/add.php');?>" method="post">
+	<form class='add' action="<?php echo url_for('/entity/restrict/patients/add.php');?>" method="post">
 		<div style="display:none">
 			<label class='xrequired'>Patient ID:</label> 
 			<input type="text" name="pid" value='<?php echo(h($patient['id']));?>'>

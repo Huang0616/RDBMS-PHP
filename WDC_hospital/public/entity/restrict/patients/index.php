@@ -1,6 +1,7 @@
-<?php require_once('../../../private/initialize.php'); ?>
+<?php require_once('../../../../private/initialize.php'); ?>
 
 <?php
+	$name = '';
 	if(is_post_request()){
 		$name = $_POST['name'];
 		$patient_set = query_patient_by_name($name);
@@ -18,8 +19,8 @@
 	<div class='pages listing'>
 		<h1>Patients</h1>
 		<div class='actions'>
-			<a href = '<?php echo url_for('/entity/patients/add.php');?>'>Add New Patient</a>
-			<form clsss='form' action="<?php echo url_for('/entity/patients/index.php'); ?>" method="post">
+			<a href = '<?php echo url_for('/entity/restrict/patients/add.php');?>'>Add New Patient</a>
+			<form clsss='form' action="<?php echo url_for('/entity/restrict/patients/index.php'); ?>" method="post">
 				Search: <input type="text" name="name" placeholder='<?php echo h($name);?>'>
 				<input type="submit" name="Search">
 			</form>
@@ -43,11 +44,11 @@
 					<td><?php echo h($patient['plname']); ?></td>
 					<td><?php echo h($patient['pgender']) ;?></td>
 					<td>
-						<a class = 'actions' href = '<?php echo url_for('/entity/patients/show.php?pid='.h(u($patient['pid']))); ?>'>View Details
+						<a class = 'actions' href = '<?php echo url_for('/entity/restrict/patients/show.php?pid='.h(u($patient['pid']))); ?>'>View Details
 						</a>
 					</td>
-					<td><a class = 'actions' href = '<?php echo url_for('/entity/patients/edit.php?pid='.h(u($patient['pid']))); ?>'>Edit</a></td>
-					<td><a class = 'actions' href = '<?php echo url_for('/entity/patients/delete.php?pid='.h(u($patient['pid'])));?>' onclick="return confirm('Are you sure to delete it?')">Delete</a></td>
+					<td><a class = 'actions' href = '<?php echo url_for('/entity/restrict/patients/edit.php?pid='.h(u($patient['pid']))); ?>'>Edit</a></td>
+					<td><a class = 'actions' href = '<?php echo url_for('/entity/restrict/patients/delete.php?pid='.h(u($patient['pid'])));?>' onclick="return confirm('Are you sure to delete it?')">Delete</a></td>
 				</tr>
 			<?php } ?>
 		</table>

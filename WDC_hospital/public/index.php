@@ -8,7 +8,7 @@
 
   <body>
 
-    <h1>WDC: Welcome!</h1>
+    <h1>WDC: Coming Soon!</h1>
 
   </body>
 </html>

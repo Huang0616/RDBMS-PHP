@@ -1,7 +1,13 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php
-  $physicians = query_all_physicians();
+  if(is_post_request()){
+    $name = $_POST['name'];
+    $physicians = query_physician_by_name($name);
+  }else{
+    $name = 'input physician name';
+    $physicians = query_all_physicians();
+  }
 ?>
 
 <?php $page_title = 'Physicians'; ?>
@@ -13,7 +19,13 @@
 
     <div class="actions">
       <a class="action" href = '<?php echo url_for('/entity/physicians/add.php');?>'>Add New Physician</a>
+      <form clsss='form' action="<?php echo url_for('/entity/physicians/index.php'); ?>" method="post">
+        Search: <input type="text" name="name" placeholder='<?php echo h($name);?>'>
+        <input type="submit" name="Search" value="Search">
+      </form>
     </div>
+
+
 
   	<table class="list">
   	  <tr>

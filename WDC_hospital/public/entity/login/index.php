@@ -49,7 +49,7 @@
 
 <div id="content">
   <div class="subjects listing">
-    <h1 style="text-align: center">Login In</h1>
+    <h1 style="text-align: center">Login</h1>
     <form id = 'login' class='add' action="<?php echo url_for('/entity/login/index.php'); ?>" method="post">  
     <div style="text-align: center">
       <label>Username: </label> 

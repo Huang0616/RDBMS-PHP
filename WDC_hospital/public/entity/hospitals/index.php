@@ -1,7 +1,13 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php
-  $hospitals = query_all_hospitals();
+  if(is_post_request()){
+    $name = $_POST['name'];
+    $hospitals = query_hospital_by_name($name);
+  }else{
+    $name = 'input hospital name';
+    $hospitals = query_all_hospitals();
+  }
 ?> 
 
 <?php $page_title = 'Hospitals'; ?>
@@ -13,6 +19,10 @@
 
     <div class="actions">
       <a class="action" href = '<?php echo url_for('/entity/hospitals/add.php');?>'>Add New Hospital</a>
+      <form clsss='form' action="<?php echo url_for('/entity/hospitals/index.php'); ?>" method="post">
+        Search: <input type="text" name="name" placeholder='<?php echo h($name);?>'>
+        <input type="submit" name="Search">
+      </form>
     </div>
 
   	<table class="list">

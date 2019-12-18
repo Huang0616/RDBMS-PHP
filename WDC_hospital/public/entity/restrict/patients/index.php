@@ -22,7 +22,7 @@
 			<a href = '<?php echo url_for('/entity/restrict/patients/add.php');?>'>Add New Patient</a>
 			<form clsss='form' action="<?php echo url_for('/entity/restrict/patients/index.php'); ?>" method="post">
 				Search: <input type="text" name="name" placeholder='<?php echo h($name);?>'>
-				<input type="submit" name="Search">
+				<input type="submit" name="Search" value="Search">
 			</form>
 		</div>
 

@@ -74,10 +74,27 @@
 	}
 
 	function query_patient_by_name($name){
+		//fuzzy search
 		global $db;
 		$sql = "select * from patient ";
 		$sql .= "where pfname like '%" . $name."%' ";
 		$sql .= "or plname like '%" . $name. "%';";
+		return mysqli_query($db,$sql);
+	}
+
+	function query_physician_by_name($name){
+		//fuzzy search
+		global $db;
+		$sql = "select * from physician ";
+		$sql .= "where phfname like '%" . $name."%';";
+		return mysqli_query($db,$sql);
+	}
+
+	function query_hospital_by_name($name){
+		//fuzzy search
+		global $db;
+		$sql = "select * from hospital ";
+		$sql .= "where hname like '%" . $name."%';";
 		return mysqli_query($db,$sql);
 	}
 

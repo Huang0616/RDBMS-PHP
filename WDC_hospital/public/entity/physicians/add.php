@@ -61,7 +61,7 @@ $hospitals = query_all_hospitals_name();
 			</select>
 			<span class='errors'><?php echo $errors['hname']??'';?></span>
 		</div>
-		<div><label> </label><input type="Submit" name="add_physician" value = "Submit"></div>
+		<div><label> </label><input type="Submit" name="add_physician" value = "Add"></div>
 	</form>
 </div>
 <?php include(SHARED_PATH . '/main_footer.php'); ?>

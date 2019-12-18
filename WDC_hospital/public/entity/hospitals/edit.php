@@ -59,7 +59,7 @@ if(is_post_request()){
 			<input type="text" name="hzip" value='<?php echo h($hospital['hzip']);?>'>
 			<span class='errors'><?php echo $errors['hzip']??'';?></span>
 		</div>
-		<div><label> </label><input type="Submit" name="edit_hospital"></div>
+		<div><label> </label><input type="Submit" name="edit_hospital" value = "Edit"></div>
 	</form>
 </div>
 <?php include(SHARED_PATH . '/main_footer.php'); ?>

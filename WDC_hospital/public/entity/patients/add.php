@@ -85,7 +85,7 @@ if(is_post_request()){
 					<input type="radio" name="pstatus" value='W'<?php if($patient['status']=='W'){echo "checked";} ?>>Widow or Widower
 					<span class='errors'><?php echo $errors['status']??'';?></span>
 		</div>
-		<div><label> </label><input type="Submit" name="add_patient"></div>
+		<div><label> </label><input type="Submit" name="add_patient" value = "Add"></div>
 	</form>
 </div>
 <?php include(SHARED_PATH . '/main_footer.php'); ?>
